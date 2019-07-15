@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "473796615727",
+    "firebase_url": "https://dojo-flutter-firebase.firebaseio.com",
+    "project_id": "dojo-flutter-firebase",
+    "storage_bucket": "dojo-flutter-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473796615727:android:31925f9fbbb48e13",
+        "android_client_info": {
+          "package_name": "com.example.dojo_flutter_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473796615727-64aabfqj8avsio7sf8515ojloi0fueqh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWSoKTZ6-gy67pKEJBILfuV8Ah4DSVOJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473796615727-64aabfqj8avsio7sf8515ojloi0fueqh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

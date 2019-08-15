@@ -11,6 +11,8 @@ class _LoginViewState extends State<LoginView> {
   bool _estaCarregando = false;
   final _controladorUsuario = TextEditingController();
   final _controladorSenha = TextEditingController();
+  FocusNode focusNodeUsuario = FocusNode();
+  FocusNode focusNodeSenha = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +28,12 @@ class _LoginViewState extends State<LoginView> {
                 children: <Widget>[
                   TextField(
                     controller: _controladorUsuario,
+                    focusNode: focusNodeUsuario,
                     decoration: InputDecoration(labelText: "Usuário"),
                   ),
                   TextField(
                     controller: _controladorSenha,
+                    focusNode: focusNodeSenha,
                     decoration: InputDecoration(labelText: "Senha"),
                     obscureText: true,
                   ),
@@ -60,17 +64,24 @@ class _LoginViewState extends State<LoginView> {
       bool senhaValida = usuarioEncontrado.documents[0]["senha"] == senha;
       if (senhaValida) {
         //NAVEGAR PARA VIEW PRINCIPAL
-        Navigator.of(context).pushNamed(NavegacaoHelper.rotaPrincipal, arguments: {"usuarioId" : usuarioEncontrado.documents[0].documentID});
+        
+        //Navegar e incluir uma página ao stack de navegação 
+        //Navigator.of(context).pushNamed(NavegacaoHelper.rotaPrincipal, arguments: {"usuarioId" : usuarioEncontrado.documents[0].documentID});
+        
+        //Navegar e zerar o stack de navegação
+        Navigator.of(context).pushNamedAndRemoveUntil(NavegacaoHelper.rotaPrincipal, (Route<dynamic> route) => false, arguments: {"usuarioId" : usuarioEncontrado.documents[0].documentID});
       } else {
-        _exibirAlerta("Senha inválida!");
+        await _exibirAlerta("Senha inválida!");
+        FocusScope.of(context).requestFocus(focusNodeSenha);
       }
     } else {
-      _exibirAlerta("Usuário não cadastrado");
+      await _exibirAlerta("Usuário não cadastrado");
+      FocusScope.of(context).requestFocus(focusNodeUsuario);
     }
   }
 
-  void _exibirAlerta(String mensagem) {
-    showDialog(
+  Future<void> _exibirAlerta(String mensagem) async {
+    await showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
